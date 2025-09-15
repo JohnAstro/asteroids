@@ -16,7 +16,9 @@ def main():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 raise SystemExit
-        
+            
+        player.update(dt)
+
         screen.fill("black") # Fill the display with a solid color
         player.draw(screen) # draw player
         pygame.display.flip() # Refresh on-screen display
