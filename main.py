@@ -6,9 +6,16 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
-    dt = 0
+    
+
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+
+    Player.containers = (updatable, drawable)
 
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+    dt = 0
+
 
     while True:
         # Process player inputs
@@ -17,10 +24,13 @@ def main():
                 pygame.quit()
                 raise SystemExit
             
-        player.update(dt)
+        updatable.update(dt)
 
         screen.fill("black") # Fill the display with a solid color
-        player.draw(screen) # draw player
+        
+        for obj in drawable:
+            obj.draw(screen)
+
         pygame.display.flip() # Refresh on-screen display
 
         # limit the framerate to 60 FPS
